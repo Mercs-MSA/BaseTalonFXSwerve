@@ -4,6 +4,10 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.path.PathPlannerPath;
+import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
+import com.pathplanner.lib.util.PIDConstants;
+import com.pathplanner.lib.util.ReplanningConfig;
+import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
@@ -59,7 +63,7 @@ public class RobotContainer {
         autoChooser = AutoBuilder.buildAutoChooser();
 
          // Register Named Commands
-        NamedCommands.registerCommand("exampleCommand", exampleSubsystem.exampleCommand());
+         NamedCommands.registerCommand("testCommand", getAutonomousCommand());
 
         // Another option that allows you to specify the default auto by its name
         // autoChooser = AutoBuilder.buildAutoChooser("My Default Auto");
@@ -86,14 +90,20 @@ public class RobotContainer {
      *
      * @return the command to run in autonomous
      */
-    // public Command getAutonomousCommand() {
-    //     // An ExampleCommand will run in autonomous
-    //     return new PathPlannerAuto("Example Auto");
-    // }
-
     public Command getAutonomousCommand() {
-        return autoChooser.getSelected();
+        // An ExampleCommand will run in autonomous
+        // return new PathPlannerAuto("Example Auto");
+
+        // Load the path you want to follow using its name in the GUI
+        PathPlannerPath path = PathPlannerPath.fromPathFile("Example Path");
+
+        // Create a path following command using AutoBuilder. This will also trigger event markers.
+        return AutoBuilder.followPath(path);
     }
+
+    // public Command getAutonomousCommand() {
+    //     return autoChooser.getSelected();
+    // }
 
     // /**
     //  * Get the path follower with events.
