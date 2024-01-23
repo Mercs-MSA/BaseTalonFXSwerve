@@ -65,15 +65,40 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));  /// suggest commenting this out while we troubleshoot this
     }
 
-    /**
-     * Use this to pass the autonomous command to the main {@link Robot} class.
-     *
-     * @return the command to run in autonomous
-     */
+
+    // paths to test 
+
     public Command getAutonomousCommand() {
-        // An ExampleCommand will run in autonomous
-        return new PathPlannerAuto("Example Auto");
+        // Load the path you want to follow using its name in the GUI
+        //spline path (test last)
+        PathPlannerPath path = PathPlannerPath.fromPathFile("Example Path");
+
+        // move forward ()
+        // PathPlannerPath path = PathPlannerPath.fromPathFile("New Path");
+
+        // move left (test 3rd)
+        // PathPlannerPath path = PathPlannerPath.fromPathFile("New New Path");
+
+        // doesn't move (test 1st)
+        // PathPlannerPath path = PathPlannerPath.fromPathFile("New New New Path");
+
+        // Create a path following command using AutoBuilder. This will also trigger event markers.
+        return AutoBuilder.followPath(path);
     }
+
+    // autos to test
+    // /**
+    //  * Use this to pass the autonomous command to the main {@link Robot} class.
+    //  *
+    //  * @return the command to run in autonomous
+    //  */
+    // public Command getAutonomousCommand() {
+    //     // An ExampleCommand will run in autonomous
+           // New Auto is just the spline path
+           // New New Auto is move left path
+           // New New New Auto is move forward (TEST SPLINE PATH LAST )
+    //     return new PathPlannerAuto("New Auto");
+    // }
 
     // /**
     //  * Get the path follower with events.
