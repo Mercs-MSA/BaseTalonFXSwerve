@@ -45,6 +45,7 @@ public class Swerve extends SubsystemBase {
     public SwerveModule[] mSwerveMods;
     public Pigeon2 gyro;
     public boolean fieldRelative;
+    public ChassisSpeeds robotVelocity;
 
     public Swerve() {
         gyro = new Pigeon2(Constants.Swerve.pigeonID);
@@ -60,11 +61,15 @@ public class Swerve extends SubsystemBase {
 
         swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
         
-
+        configurePathPlanner();
     }
 
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
         this.fieldRelative = fieldRelative;
+        this.robotVelocity = new ChassisSpeeds(
+                                    translation.getX(), 
+                                    translation.getY(), 
+                                    rotation);
         SwerveModuleState[] swerveModuleStates =
             Constants.Swerve.swerveKinematics.toSwerveModuleStates(
                 fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
@@ -151,27 +156,6 @@ public class Swerve extends SubsystemBase {
         }
     }
  
-    // /**
-    //  * Gets the current velocity (x, y and omega) of the robot
-    //  *
-    //  * @return A {@link ChassisSpeeds} object of the current velocity
-    //  */
-    // public ChassisSpeeds getRobotVelocity()
-    // {
-    //     return getRobotVelocity();
-    // }
-
-    // /**
-    //  * Set chassis speeds with closed-loop velocity control.
-    //  *
-    //  * @param chassisSpeeds Chassis Speeds to set.
-    //  */
-    // public void setChassisSpeeds(ChassisSpeeds chassisSpeeds)
-    // {
-    //     return swerveDrive.setChassisSpeeds(chassisSpeeds);
-    // }
-
-
     public void configurePathPlanner(){
         AutoBuilder.configureHolonomic(
                     this::getPose, // Robot pose supplier
@@ -206,7 +190,7 @@ public class Swerve extends SubsystemBase {
     }
 
     public ChassisSpeeds getRobotVelocity() {
-        return kinematics.toChassisSpeeds(); //fix this 
+        return this.robotVelocity;
     }
 
     public void setChassisSpeeds(ChassisSpeeds chassisSpeeds)
@@ -214,8 +198,6 @@ public class Swerve extends SubsystemBase {
         drive(new Translation2d(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond),
         chassisSpeeds.omegaRadiansPerSecond, fieldRelative, false);
     }
-
-
 
     public Command getAutonomousCommand(String pathName, boolean setOdomToStart){
 
