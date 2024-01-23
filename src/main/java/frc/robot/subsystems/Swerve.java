@@ -25,7 +25,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 
 import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.commands.FollowPathHolonomic;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
@@ -41,7 +40,7 @@ public class Swerve extends SubsystemBase {
     private final SwerveRequest.ApplyChassisSpeeds autoRequest = new SwerveRequest.ApplyChassisSpeeds();
 
     public SwerveDriveKinematics kinematics; 
-    public SwerveDriveOdometry swerveOdometry = new SwerveDriveOdometry(kinematics, getGyroYaw(), getModulePositions());
+    public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
     public Pigeon2 gyro;
     public boolean fieldRelative;
@@ -61,7 +60,7 @@ public class Swerve extends SubsystemBase {
 
         swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
         
-        configurePathPlanner();
+
     }
 
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
@@ -155,7 +154,8 @@ public class Swerve extends SubsystemBase {
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
         }
     }
- 
+
+
     public void configurePathPlanner(){
         AutoBuilder.configureHolonomic(
                     this::getPose, // Robot pose supplier
@@ -199,6 +199,7 @@ public class Swerve extends SubsystemBase {
         chassisSpeeds.omegaRadiansPerSecond, fieldRelative, false);
     }
 
+
     public Command getAutonomousCommand(String pathName, boolean setOdomToStart){
 
         // Load the path you want to follow using its name in the GUI
@@ -211,5 +212,7 @@ public class Swerve extends SubsystemBase {
 
         // Create a path following command using AutoBuilder. This will also trigger event markers.
         return AutoBuilder.followPath(path);
+
     }
+
 }
