@@ -71,7 +71,7 @@ public class RobotContainer {
     public Command getAutonomousCommand() {
         // Load the path you want to follow using its name in the GUI
         //spline path (test last)
-        PathPlannerPath path = PathPlannerPath.fromPathFile("Example Path");
+        PathPlannerPath path = PathPlannerPath.fromPathFile("static");
 
         // move forward ()
         // PathPlannerPath path = PathPlannerPath.fromPathFile("New Path");

@@ -44,7 +44,7 @@ public class Swerve extends SubsystemBase {
     public SwerveModule[] mSwerveMods;
     public Pigeon2 gyro;
     public boolean fieldRelative;
-    public ChassisSpeeds robotVelocity;
+    public ChassisSpeeds robotVelocity = new ChassisSpeeds();
 
     public Swerve() {
         gyro = new Pigeon2(Constants.Swerve.pigeonID);
@@ -57,9 +57,9 @@ public class Swerve extends SubsystemBase {
             new SwerveModule(2, Constants.Swerve.Mod2.constants),
             new SwerveModule(3, Constants.Swerve.Mod3.constants)
         };
+        Timer.delay(1.0);
 
         swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
-        
         configurePathPlanner();
     }
 
@@ -163,9 +163,9 @@ public class Swerve extends SubsystemBase {
                     this::getRobotVelocity, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
                     this::setChassisSpeeds, // Consumer of ChassisSpeeds to drive the robot // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
                     new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
-                            new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
-                            new PIDConstants(5.0, 0.0, 0.0), // Rotation PID constants
-                            4.5, // Max module speed, in m/s
+                            new PIDConstants(1.0, 0.0, 0.0), // Translation PID constants
+                            new PIDConstants(1.0, 0.0, 0.0), // Rotation PID constants
+                            0.05, // Max module speed, in m/s
                             0.4, // Drive base radius in meters. Distance from robot center to furthest module.
                             new ReplanningConfig() // Default path replanning config. See the API for the options here
                     ),
