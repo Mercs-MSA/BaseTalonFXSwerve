@@ -186,7 +186,7 @@ public class Swerve extends SubsystemBase {
 
      // Method to reset odometry (will be called if your auto has a starting pose)
     public void resetPose(Pose2d initialHolonomicPose) {
-        swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), getPose());
+        swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), initialHolonomicPose);
     }
 
     public ChassisSpeeds getRobotVelocity() {
