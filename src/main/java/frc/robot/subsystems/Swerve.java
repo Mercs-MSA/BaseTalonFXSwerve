@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
@@ -60,6 +61,7 @@ public class Swerve extends SubsystemBase {
         Timer.delay(1.0);
 
         swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
+
         configurePathPlanner();
     }
 
@@ -147,6 +149,9 @@ public class Swerve extends SubsystemBase {
     @Override
     public void periodic(){
         swerveOdometry.update(getGyroYaw(), getModulePositions());
+        SmartDashboard.putNumber("Odometry Pose X", swerveOdometry.getPoseMeters().getX());
+        SmartDashboard.putNumber("Odometry Pose Y", swerveOdometry.getPoseMeters().getY());
+        SmartDashboard.putNumber("Odometry Pose Yaw", swerveOdometry.getPoseMeters().getRotation().getDegrees());
 
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANcoder().getDegrees());
@@ -187,6 +192,7 @@ public class Swerve extends SubsystemBase {
      // Method to reset odometry (will be called if your auto has a starting pose)
     public void resetPose(Pose2d initialHolonomicPose) {
         swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), initialHolonomicPose);
+        //swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), new Pose2d());
     }
 
     public ChassisSpeeds getRobotVelocity() {

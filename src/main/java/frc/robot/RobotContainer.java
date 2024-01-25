@@ -71,7 +71,8 @@ public class RobotContainer {
     public Command getAutonomousCommand() {
         // Load the path you want to follow using its name in the GUI
         //spline path (test last)
-        PathPlannerPath path = PathPlannerPath.fromPathFile("static");
+        //PathPlannerPath path = PathPlannerPath.fromPathFile("static.path");
+
 
         // move forward ()
         // PathPlannerPath path = PathPlannerPath.fromPathFile("New Path");
@@ -83,7 +84,7 @@ public class RobotContainer {
         // PathPlannerPath path = PathPlannerPath.fromPathFile("New New New Path");
 
         // Create a path following command using AutoBuilder. This will also trigger event markers.
-        return AutoBuilder.followPath(path);
+        return s_Swerve.getAutonomousCommand("static.path", true);
     }
 
     // autos to test
