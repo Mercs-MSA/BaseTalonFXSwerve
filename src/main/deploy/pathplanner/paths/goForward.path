@@ -11,7 +11,7 @@
         "x": 0.5,
         "y": 0.0
       },
-      "isLocked": false,
+      "isLocked": true,
       "linkedName": null
     },
     {

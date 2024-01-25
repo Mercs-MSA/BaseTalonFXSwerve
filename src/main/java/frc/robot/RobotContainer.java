@@ -84,7 +84,11 @@ public class RobotContainer {
         // PathPlannerPath path = PathPlannerPath.fromPathFile("New New New Path");
 
         // Create a path following command using AutoBuilder. This will also trigger event markers.
+<<<<<<< HEAD
         return s_Swerve.getAutonomousCommand("goLeft", true);
+=======
+        return s_Swerve.getAutonomousCommand("static", true);
+>>>>>>> 16a1f15212f955c9436130b6c49edc3d62028b6d
     }
 
     // autos to test

@@ -8,7 +8,11 @@
       },
       "prevControl": null,
       "nextControl": {
+<<<<<<< HEAD
         "x": 0.0,
+=======
+        "x": 3.061616997868383e-17,
+>>>>>>> 16a1f15212f955c9436130b6c49edc3d62028b6d
         "y": 0.5
       },
       "isLocked": false,
@@ -20,7 +24,11 @@
         "y": 1.0
       },
       "prevControl": {
+<<<<<<< HEAD
         "x": 0.0,
+=======
+        "x": -3.061616997868383e-17,
+>>>>>>> 16a1f15212f955c9436130b6c49edc3d62028b6d
         "y": 0.5
       },
       "nextControl": null,
