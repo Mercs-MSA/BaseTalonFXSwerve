@@ -4,14 +4,9 @@
 
 package frc.robot;
 
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.Constants.State.robotState;
-import frc.robot.subsystems.vision.GamePieceVision;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -26,12 +21,6 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
-  robotState currentRobotState = robotState.IDLE;
-
-  // GamePieceVision m_GamePieceVision = new GamePieceVision("GamePiece");
-
-  XboxController driverController = new XboxController(0);
-
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -41,7 +30,6 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    Constants.State.setState("IDLE");
   }
 
   /**
@@ -58,15 +46,6 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    SmartDashboard.putString("Current Robot State", Constants.State.getState().toString());
-    SmartDashboard.putNumber("pose x", m_robotContainer.s_Swerve.swerveOdometry.getPoseMeters().getX());
-    SmartDashboard.putNumber("pose y", m_robotContainer.s_Swerve.swerveOdometry.getPoseMeters().getY());
-
-    SmartDashboard.putNumber("get robot velocity x ", m_robotContainer.s_Swerve.robotVelocity.vxMetersPerSecond);
-    SmartDashboard.putNumber("get robot velocity y ", m_robotContainer.s_Swerve.robotVelocity.vyMetersPerSecond);
-    SmartDashboard.putNumber("get robot velocity omega ", m_robotContainer.s_Swerve.robotVelocity.omegaRadiansPerSecond);
-
-    // m_GamePieceVision.periodic();
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -104,17 +83,7 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {
-
-    // SmartDashboard.putNumber("yaw note", m_GamePieceVision.getGamePieceYaw());
-    // if (driverController.getRawButton(5)){
-    //     m_robotContainer.s_Swerve.drive(new Translation2d(0, 0), m_GamePieceVision.getGamePieceYaw()/20, false, true);
-    // }
-
-
-
-      
-  }
+  public void teleopPeriodic() {}
 
   @Override
   public void testInit() {

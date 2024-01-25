@@ -18,12 +18,11 @@ public final class Constants {
     public static final class Swerve {
         public static final int pigeonID = 16;
 
-        public static final COTSTalonFXSwerveConstants chosenModule =  COTSTalonFXSwerveConstants.WCP.SwerveXStandard.Falcon500(COTSTalonFXSwerveConstants.WCP.SwerveXStandard.driveRatios.X2_11);
-        // COTSTalonFXSwerveConstants.SDS.MK4i.Falcon500(COTSTalonFXSwerveConstants.SDS.MK4i.driveRatios.L2);
+        public static final COTSTalonFXSwerveConstants chosenModule = COTSTalonFXSwerveConstants.WCP.SwerveXStandard.Falcon500(COTSTalonFXSwerveConstants.WCP.SwerveXStandard.driveRatios.X2_11);
 
         /* Drivetrain Constants */
-        public static final double trackWidth = Units.inchesToMeters(25.15); //TODO: This must be tuned to specific robot
-        public static final double wheelBase = Units.inchesToMeters(25.15); //TODO: This must be tuned to specific robot
+        public static final double trackWidth = Units.inchesToMeters(25.15); 
+        public static final double wheelBase = Units.inchesToMeters(25.15);
         public static final double wheelCircumference = chosenModule.wheelCircumference;
 
         /* Swerve Kinematics 
@@ -67,69 +66,69 @@ public final class Constants {
         public static final double angleKD = chosenModule.angleKD;
 
         /* Drive Motor PID Values */
-        public static final double driveKP = 0.12; //TODO: This must be tuned to specific robot
+        public static final double driveKP = 0.12; 
         public static final double driveKI = 0.0;
         public static final double driveKD = 0.0;
         public static final double driveKF = 0.0;
 
         /* Drive Motor Characterization Values From SYSID */
-        public static final double driveKS = 0.32; //TODO: This must be tuned to specific robot
+        public static final double driveKS = 0.32; 
         public static final double driveKV = 1.51;
         public static final double driveKA = 0.27;
 
         /* Swerve Profiling Values */
         /** Meters per Second */
-        public static final double maxSpeed = 4.5; //TODO: This must be tuned to specific robot
+        public static final double maxSpeed = 4.5;
         /** Radians per Second */
-        public static final double maxAngularVelocity = 10.0; //TODO: This must be tuned to specific robot
+        public static final double maxAngularVelocity = 10.0;
 
         /* Neutral Modes */
         public static final NeutralModeValue angleNeutralMode = NeutralModeValue.Coast;
         public static final NeutralModeValue driveNeutralMode = NeutralModeValue.Brake;
 
-        /* Module Specific Constants */
+         /* Module Specific Constants */
         /* Front Left Module - Module 0 */
-        public static final class Mod0 { //TODO: This must be tuned to specific robot
+        public static final class Mod0 {
             public static final int driveMotorID = 39;
             public static final int angleMotorID = 40;
             public static final int canCoderID = 11;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-117.0); //-111.2
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-117.0);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
 
         /* Front Right Module - Module 1 */
-        public static final class Mod1 { //TODO: This must be tuned to specific robot
+        public static final class Mod1 { 
             public static final int driveMotorID = 36;
             public static final int angleMotorID = 37;
             public static final int canCoderID = 10;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-13.0+73.0); //-125.6
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-13.0+73.0);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
         
         /* Back Left Module - Module 2 */
-        public static final class Mod2 { //TODO: This must be tuned to specific robot
+        public static final class Mod2 { 
             public static final int driveMotorID = 31;
             public static final int angleMotorID = 33;
             public static final int canCoderID = 13;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(75.4); //42.36+90
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(75.4);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
 
         /* Back Right Module - Module 3 */
-        public static final class Mod3 { //TODO: This must be tuned to specific robot
+        public static final class Mod3 { 
             public static final int driveMotorID = 34;
             public static final int angleMotorID = 35;
             public static final int canCoderID = 12;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-122.6-90+15); //132.1
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-122.6-90+15);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
     }
 
-    public static final class AutoConstants { //TODO: The below constants are used in the example auto, and must be tuned to specific robot
+    public static final class AutoConstants { 
         public static final double kMaxSpeedMetersPerSecond = 3;
         public static final double kMaxAccelerationMetersPerSecondSquared = 3;
         public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
@@ -144,115 +143,4 @@ public final class Constants {
             new TrapezoidProfile.Constraints(
                 kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
     }
-
-    public static class IntakeConstants {
-
-        // Motor IDs
-        public static final int INTAKE_ARM_MOTOR_ID = 7;
-        public static final int INTAKE_ROLLER_MOTOR_ID = 8;
-    
-    }
-
-
-    public static class SATConstants {
-
-        // Motor IDs
-        public static final int SAT_SHOOTER1_MOTOR_ID = 28;
-        public static final int SAT_SHOOTER2_MOTOR_ID = 29;
-
-        public static final int SAT_PIVOT_MOTOR_ID = 27;
-        public static final int SAT_BASE1_MOTOR_ID = 26;
-        public static final int SAT_BASE2_MOTOR_ID = 25;
-
-        public static final int SAT_OBJECTDETECTOR_SENSOR_ID = 1;
-
-        public static final int SAT_SERVO1_SERVO_ID = 9;
-        public static final int SAT_SERVO2_SERVO_ID = 8;
-        public static final int SAT_SERVO3_SERVO_ID = 7;
-        public static final int SAT_SERVO4_SERVO_ID = 6;
-        /*lift start positions */
-        public static final int BASE_START_POS = 0;
-        public static final int PIVOT_START_POS = 0;
-        /*podium scoring position */
-        public static final int BASE_PODIUM_POS = 45;
-        public static final int PIVOT_PODIUM_POS = 0;
-        /*SUBWOOFER scoring position */
-        public static final int BASE_SUB_POS = 0;
-        public static final int PIVOT_SUB_POS = 0;
-        /*AMP scoring position */
-        public static final int BASE_AMP_POS = 0;
-        public static final int PIVOT_AMP_POS = 0;
-        /*TRAP scoring position */
-        public static final int BASE_TRAP_POS = 0;
-        public static final int PIVOT_TRAP_POS = 0;
-
-        public static final int BASE_THROUGHBORE_ENCODER = 2;
-        public static final int PIVOT_THROUGHBORE_ENCODER = 3;
-        /*THIS NEEDS TO INCLUDE THE CONVERSION FROM DEGREES TO ENCODER COUNTS */
-        public static final int BASE_ENCODER_RATIO = 50;
-        public static final int PIVOT_ENCODER_RATIO = 20;
-
-      // PID coefficients
-        public static final double kP = 0.1; 
-        public static final double kI = 1e-4;
-        public static final double kD = 1; 
-        public static final double kIz = 0; 
-        public static final double kFF = 0; 
-        public static final double kMaxOutput = 1; 
-        public static final double kMinOutput = -1;
-
-        }
-        
-    public static final class Climber
-    {
-  
-      public static final int tubeMotor_Left_ID = 9;    ///  reassign this to something else...
-      public static final int winchMotor_Left_ID = 2;
-      public static final int tubeMotor_Right_ID = 3;
-      public static final int winchMotor_Right_ID = 4;
-  
-    }
-
-    public static final class State {
-        public static robotState currentRobotState = robotState.IDLE;
-
-        enum robotState{
-            INTAKE, //the intake must be at ground note pickup position, the SAT must be flat, the note is stored in intake (for now)
-            IDLE, //the intake must be up, the SAT must be flat, the note is stored in feeder (part of SAT)
-            PIVOT, //the intake must be up, the SAT will move to angled position based on kinematics calculations, the note is stored in feeder (part of SAT)
-            SCORING //the intake must be up, the SAT must be at thge angled position, the note must move from feeders to flywheels  
-        }   
-    
-        // if intake IR does not detect note, the intake must keep spining; else, intake does not spin
-        // flywheel must always be spinning 
-        // if robot state is SCORING, feeder must be spinning; else, feeder does not spin
-        // Big Question: can we combine IDLE and PIVOT??? (ans: yes, these will be done auto without driver from switching states)
-
-        public static robotState getState(){
-            return currentRobotState;
-        }
-
-        public static void setState(String newState) {
-            switch (newState.toUpperCase()) {
-                case "INTAKE":
-                    currentRobotState = robotState.INTAKE;
-                    break;
-                case "IDLE":
-                    currentRobotState = robotState.IDLE;
-                    break;
-                case "PIVOT":
-                    currentRobotState = robotState.PIVOT;
-                    break;
-                case "SCORING":
-                    currentRobotState = robotState.SCORING;
-                    break;
-                default:
-                    currentRobotState = robotState.INTAKE; //do I want to do this?
-                    break;
-            }
-        }
-        
-    }
-
-
 }
