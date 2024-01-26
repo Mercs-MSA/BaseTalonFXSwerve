@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.0,
-      "y": 0.0
+      "x": 1.4871952550907335,
+      "y": 5.301659024366646
     },
     "rotation": 0
   },
@@ -14,13 +14,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "TwoPiece"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Taxi"
+            "pathName": "Move_Straight"
           }
         }
       ]
