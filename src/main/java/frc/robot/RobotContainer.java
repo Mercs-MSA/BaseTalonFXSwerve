@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.FunctionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,6 +16,8 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.SAT.SAT;
+import frc.robot.subsystems.climber.climber;
+import frc.robot.subsystems.climber.climber.climberStates;
 import frc.robot.subsystems.vision.CustomGamePieceVision;
 import frc.robot.subsystems.intake.Intake;
 
@@ -33,6 +36,7 @@ public class RobotContainer {
     public final Swerve s_Swerve = new Swerve();
     public SAT m_SAT = new SAT();
     public Intake intake = new Intake();
+    public climber m_climber = new climber();
     public CustomGamePieceVision m_GamePieceVision = new CustomGamePieceVision("note_pipeline");
 
      /* AutoChooser */
@@ -134,6 +138,42 @@ public class RobotContainer {
             .and(operator.x())
             .onTrue(Commands.runOnce(()-> intake.stopIntakeMotor(), intake))
             .onFalse(Commands.runOnce(()-> intake.stopIntakeMotor(), intake));
+        
+        operator.leftBumper()
+            .onTrue(new FunctionalCommand(
+                ()-> {},
+                ()-> {m_climber.buttonClimbToZero();}, 
+                (interupt)-> {}, 
+                ()-> {if (m_climber.my_climber_state == climberStates.IN_CLIMBING_POSITION) {return true;} else {return false;}}, 
+                m_climber
+            ));
+
+        operator.rightBumper()
+            .onTrue(new FunctionalCommand(
+                ()-> {},
+                ()-> {m_climber.testMiddleClimb();}, 
+                (interupt)-> {}, 
+                ()-> {if (m_climber.my_climber_state == climberStates.IN_CLIMBING_POSITION) {return true;} else {return false;}}, 
+                m_climber
+            ));
+
+        operator.rightTrigger()
+            .onTrue(new FunctionalCommand(
+                ()-> {},
+                ()-> {m_climber.testSideClimbRight();}, 
+                (interupt)-> {}, 
+                ()-> {if (m_climber.my_climber_state == climberStates.IN_CLIMBING_POSITION) {return true;} else {return false;}}, 
+                m_climber
+            ));
+
+        operator.rightTrigger()
+            .onTrue(new FunctionalCommand(
+                ()-> {},
+                ()-> {m_climber.testSideClimbRight();();}, 
+                (interupt)-> {}, 
+                ()-> {if (m_climber.my_climber_state == climberStates.IN_CLIMBING_POSITION) {return true;} else {return false;}}, 
+                m_climber
+            ));
         }
 
     /**

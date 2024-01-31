@@ -35,7 +35,7 @@ public class climber extends SubsystemBase {
       //double Right_Joystick;
       double rightMotorPosition;
       double leftMotorPosition;
-      climberStates my_climber_state = climberStates.START;
+      public climberStates my_climber_state = climberStates.START;
           
       /* TODO:
         - setDirection() changes the variable depending on direction
@@ -98,89 +98,96 @@ public class climber extends SubsystemBase {
     /**
    * This method prepares the robot for climbing in the middle of the chain
    */
-  private void buttonBottomClimb() {
+
+  
+
+  public void buttonClimbToZero() {
     tubeMotorRight.setControl(tubeMotorRight_voltagePosition.withPosition(Constants.climberConstants.bottom_climber_position));
     tubeMotorLeft.setControl(tubeMotorRight_voltagePosition.withPosition(Constants.climberConstants.bottom_climber_position));
+    my_climber_state = climberStates.MOVING_TO_CLIMB;
+    if (Math.abs(tubeMotorRight.getClosedLoopError().getValueAsDouble()) < .5) {
+      my_climber_state = climberStates.IN_CLIMBING_POSITION;
+    } else {
+      my_climber_state = climberStates.MOVING_TO_CLIMB;
+    }
   }
 
-  private void buttonClimbTest() {
+  public void testMiddleClimb() {
     tubeMotorRight.setControl(tubeMotorRight_voltagePosition.withPosition(Constants.climberConstants.test_climber_position));
     tubeMotorLeft.setControl(tubeMotorRight_voltagePosition.withPosition(Constants.climberConstants.test_climber_position));
   }
 
-  private void buttonClimbTest2() {
+  public void testSideClimbRight() {
     tubeMotorRight.setControl(tubeMotorRight_voltagePosition.withPosition(Constants.climberConstants.test_climber_position));
     tubeMotorLeft.setControl(tubeMotorRight_voltagePosition.withPosition(Constants.climberConstants.test2_climber_position));
   }
 
-  private void climbRightUp() {
-    if (rightMotorPosition > -1000) {
-      tubeMotorRight.setControl(tubeMotorRight_voltagePosition.withPosition(rightMotorPosition + Constants.climberConstants.climber_Increment));
-      //realPosition += Constants.climberConstants.climber_Increment;
-      //tubeMotorRight.set(0.3);
-      SmartDashboard.putString("power input for robot", "0.3");
-    }
-}
-  private void climbRightDown() {
-    if (rightMotorPosition < 0) {
-      tubeMotorRight.setControl(tubeMotorRight_voltagePosition.withPosition(rightMotorPosition - Constants.climberConstants.climber_Increment));
-      //tubeMotorRight.set(-0.3);
-      SmartDashboard.putString("power input for robot", "-0.3");
-    }
-  }
-  private void climbLeftUp() {
-    if (leftMotorPosition > -1000) {
-      tubeMotorLeft.setControl(tubeMotorLeft_voltagePosition.withPosition(leftMotorPosition + Constants.climberConstants.climber_Increment));
-      //tubeMotorLeft.set(0.3);
-      SmartDashboard.putString("power input for robot", "0.3");
-    }
+  public void testSideClimbLeft() {
+    tubeMotorRight.setControl(tubeMotorRight_voltagePosition.withPosition(Constants.climberConstants.test2_climber_position));
+    tubeMotorLeft.setControl(tubeMotorRight_voltagePosition.withPosition(Constants.climberConstants.test_climber_position));
   }
 
-  private void climbLeftDown() {
-    if (leftMotorPosition < 0) {
-      tubeMotorLeft.setControl(tubeMotorLeft_voltagePosition.withPosition(leftMotorPosition - Constants.climberConstants.climber_Increment));
-      //tubeMotorLeft.set(-0.3);
-      SmartDashboard.putString("power input for robot", "-0.3");
-    }
-}
+//   private void climbRightUp() {
+//     if (rightMotorPosition > -1000) {
+//       tubeMotorRight.setControl(tubeMotorRight_voltagePosition.withPosition(rightMotorPosition + Constants.climberConstants.climber_Increment));
+//       //realPosition += Constants.climberConstants.climber_Increment;
+//       //tubeMotorRight.set(0.3);
+//       SmartDashboard.putString("power input for robot", "0.3");
+//     }
+// }
+//   private void climbRightDown() {
+//     if (rightMotorPosition < 0) {
+//       tubeMotorRight.setControl(tubeMotorRight_voltagePosition.withPosition(rightMotorPosition - Constants.climberConstants.climber_Increment));
+//       //tubeMotorRight.set(-0.3);
+//       SmartDashboard.putString("power input for robot", "-0.3");
+//     }
+//   }
+//   private void climbLeftUp() {
+//     if (leftMotorPosition > -1000) {
+//       tubeMotorLeft.setControl(tubeMotorLeft_voltagePosition.withPosition(leftMotorPosition + Constants.climberConstants.climber_Increment));
+//       //tubeMotorLeft.set(0.3);
+//       SmartDashboard.putString("power input for robot", "0.3");
+//     }
+//   }
 
-  private void climbStop() {
-    tubeMotorLeft.set(0);
-    tubeMotorRight.set(0);
-    SmartDashboard.putString("power input for robot", "0");
-  }
+//   private void climbLeftDown() {
+//     if (leftMotorPosition < 0) {
+//       tubeMotorLeft.setControl(tubeMotorLeft_voltagePosition.withPosition(leftMotorPosition - Constants.climberConstants.climber_Increment));
+//       //tubeMotorLeft.set(-0.3);
+//       SmartDashboard.putString("power input for robot", "-0.3");
+//     }
+// }
 
-// Block of all commands
-public Command climbUpRightCommand() {
-  return this.runOnce(() -> climbRightUp());
-}
+//   private void climbStop() {
+//     tubeMotorLeft.set(0);
+//     tubeMotorRight.set(0);
+//     SmartDashboard.putString("power input for robot", "0");
+//   }
 
-public Command climbDownRightCommand() {
-  return this.runOnce(() -> climbRightDown());
-}
+// // Block of all commands
+// public Command climbUpRightCommand() {
+//   return this.runOnce(() -> climbRightUp());
+// }
 
-public Command climbDownLeftCommand() {
-  return this.runOnce(() -> climbLeftDown());
-}
+// public Command climbDownRightCommand() {
+//   return this.runOnce(() -> climbRightDown());
+// }
 
-public Command climbUpLeftCommand() {
-  return this.runOnce(() -> climbLeftUp());
-}
+// public Command climbDownLeftCommand() {
+//   return this.runOnce(() -> climbLeftDown());
+// }
 
-public Command bottomButtonCommand() {
-  return this.runOnce(() -> bottomButtonCommand());
-}
+// public Command climbUpLeftCommand() {
+//   return this.runOnce(() -> climbLeftUp());
+// }
 
-public Command buttonTestCommand() {
-  return this.runOnce(() -> buttonClimbTest());
-}
+// public Command bottomButtonCommand() {
+//   return this.runOnce(() -> bottomButtonCommand());
+// }
 
-public Command buttonTest2Command() {
-  return this.runOnce(() -> buttonClimbTest2());
-}
  
 // State Enumeration
   public enum climberStates {
-    START, MOVING_TO_CLIMB, IN_CLIMBING_POSITION, COMPLETED_CLIMB, ERROR;
+    START, MOVING_TO_CLIMB, IN_CLIMBING_POSITION, CLIMBING, COMPLETED_CLIMB, ERROR;
   }
 }
