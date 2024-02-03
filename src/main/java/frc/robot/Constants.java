@@ -169,6 +169,8 @@ public final class Constants {
     public static class IntakeConstants {
         public static final int kIntakeMotorId = 8;
         public static final double kIntakeMotorSpeed = 0.80;
+        public static final int kIndexMotorId = 9;
+        public static final double kIndexMotorSpeed = 0.40;
         public static final int kIntakeSensorId = 0;
     }
 
@@ -176,13 +178,14 @@ public final class Constants {
 
 
         // Motor IDs
-        public static final int SAT_SHOOTER1_MOTOR_ID = 28;
-        public static final int SAT_SHOOTER2_MOTOR_ID = 29;
+        public static final int SAT_SHOOTER1_MOTOR_ID = 29;
+        public static final int SAT_SHOOTER2_MOTOR_ID = 27;
 
 
-        public static final int SAT_PIVOT_MOTOR_ID = 27;
+        public static final int SAT_PIVOT_MOTOR_ID = 28;
         public static final int SAT_BASE1_MOTOR_ID = 26;
         public static final int SAT_BASE2_MOTOR_ID = 25;
+        // INDEXER IS 24
 
 
         public static final int SAT_OBJECTDETECTOR_SENSOR_ID = 1;
@@ -207,6 +210,8 @@ public final class Constants {
         /*TRAP scoring position */
         public static final int BASE_TRAP_POS = 0;
         public static final int PIVOT_TRAP_POS = 0;
+
+        public static final double SHOOTER_SPEED = 0.6;
 
 
         public static final int BASE_THROUGHBORE_ENCODER = 2;
